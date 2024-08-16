@@ -608,7 +608,7 @@
   id: UplinkEmpFlashlight
   name: uplink-emp-flashlight-name
   description: uplink-emp-flashlight-desc
-  productEntity: EmpFlashlight
+  productEntity: FlashlightEmp
   cost:
     Telecrystal: 3
   categories:

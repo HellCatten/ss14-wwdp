@@ -22,9 +22,6 @@ public sealed class EmpHitSystem : EntitySystem
     [Dependency] private readonly EntityLookupSystem _lookup = default!;
     [Dependency] private readonly EmpSystem _emp = default!;
     [Dependency] private readonly SharedChargesSystem _charges = default!;
-
-    public const string EmpPulseEffectPrototype = "EffectEmpPulse";
-
     public override void Initialize()
     {
         base.Initialize();
@@ -33,31 +30,32 @@ public sealed class EmpHitSystem : EntitySystem
 
     public bool TryEmpHit(EntityUid uid, EmpOnHitComponent comp, MeleeHitEvent args)
     {
-        TryComp<LimitedChargesComponent>(uid, out var charges);
-        if (_charges.IsEmpty(uid, charges))
-        {
+        LimitedChargesComponent? charges;
+        if (!TryComp<LimitedChargesComponent>(uid, out charges))
             return false;
-        }
 
-        if (charges != null && args.HitEntities.Count>0)
+        if (_charges.IsEmpty(uid, charges))
+            return false;
+
+        if (charges != null && args.HitEntities.Count > 0)
         {
             _charges.UseCharge(uid,charges);
             return true;
         }
+
         return false;
     }
 
     private void HandleEmpHit(EntityUid uid, EmpOnHitComponent comp, MeleeHitEvent args)
     {
-        if (TryEmpHit(uid, comp, args))
-        {
-            foreach (EntityUid hitEntityUid in args.HitEntities)
-            {
-                _emp.EmpPulse(Transform(hitEntityUid).MapPosition, comp.Range, comp.EnergyConsumption,
-                    comp.DisableDuration);
-            }
+        if (!TryEmpHit(uid, comp, args))
+            return;
 
-            args.Handled = true;
+        foreach (var affected in args.HitEntities)
+        {
+            _emp.EmpPulse(Transform(affected).MapPosition, comp.Range, comp.EnergyConsumption, comp.DisableDuration);
         }
+
+        args.Handled = true;
     }
 }
