@@ -603,6 +603,17 @@
     Telecrystal: 5
   categories:
     - UplinkUtility
+
+- type: listing
+  id: UplinkEmpFlashlight
+  name: uplink-emp-flashlight-name
+  description: uplink-emp-flashlight-desc
+  productEntity: EmpFlashlight
+  cost:
+    Telecrystal: 3
+  categories:
+    - UplinkUtility
+
 # Implants
 
 - type: listing

@@ -160,6 +160,9 @@ uplink-syndicate-weapon-module-desc = This module will give a cyborg advanced la
 uplink-singularity-beacon-name = Singularity Beacon
 uplink-singularity-beacon-desc = A device that attracts singularities. Has to be anchored and powered. Causes singularities to grow when consumed.
 
+uplink-emp-flashlight-name = Emp Flashlight
+uplink-emp-flashlight-desc = A rechargeable device disguised as a flashlight designed to disrupt electronic systems. Useful for disrupting communications, security's energy weapons, and APCs when you're in a tight spot.
+
 # Implants
 uplink-storage-implanter-name = Storage Implanter
 uplink-storage-implanter-desc = Hide goodies inside of yourself with new bluespace technology!
